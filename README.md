@@ -13,4 +13,4 @@ Now you should be able to run clin from your terminal with "clin" command.
 
 # SHOWCASE
 
-![](![](https://github.com/reekta92/clin/blob/main/showcase.gif))
+![](https://github.com/reekta92/clin/blob/main/showcase.gif)
