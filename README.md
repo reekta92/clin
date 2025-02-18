@@ -10,3 +10,7 @@ A very simple CLI notes program programmed in C# and .NET SDK 9.0, needs to be a
 ![](https://github.com/reekta92/clin/blob/main/path.gif)
 
 Now you should be able to run clin from your terminal with "clin" command.
+
+# SHOWCASE
+
+![](https://github.com/reekta92/clin/blob/main/showcase.gif)
