@@ -1,56 +1,58 @@
 ﻿using System.Diagnostics;
-
-Console.WriteLine("\u001b[1;34mPlease enter your notes. Type 'notes' to open the notes file, 'clear' to clear the notes, 'show' to show the notes, or 'exit' to exit the program.\u001b[0m");
-
-var storedNotes = new List<string>();
-string userInput;
-
-while (true)
+internal class Program
 {
-    Console.Write("\u001b[1;32m> \u001b[0m");
-    userInput = Console.ReadLine() ?? string.Empty;
+	private static void Main(string[] args)
+	{
+		Console.WriteLine(
+			"\u001b[1;34mPlease enter your notes. Type 'notes' to open the notes " +
+			"file, 'clear' to clear the notes, 'show' to show the notes, or " +
+			"'exit' to exit the program.\u001b[0m");
 
-    if (string.IsNullOrEmpty(userInput))
-    {
-        Console.WriteLine("\u001b[1;31mInvalid input!\u001b[0m");
-        continue;
-    }
+		var StoredNotes = new List<string>();
 
-    if (userInput == "exit")
-    {
-        break;
-    }
-    else if (userInput == "notes")
-    {
-        Process.Start(new ProcessStartInfo("notes.txt")
-        { UseShellExecute = true });
-    }
-    else if (userInput == "clear")
-    {
-        storedNotes.Clear();
-        File.WriteAllText("notes.txt", string.Empty);
-        Console.WriteLine("\u001b[1;33mNotes cleared successfully!\u001b[0m");
-    }
-    else if (userInput == "show")
-    {
-        if (!File.Exists("notes.txt") || new FileInfo("notes.txt").Length == 0)
-        {
-            Console.WriteLine("\u001b[1;31mNo notes found!\u001b[0m");
-        }
-        else
-        {
-            Console.WriteLine("\u001b[1;34mNotes:\u001b[0m");
-            string[] notesFromFile = File.ReadAllLines("notes.txt");
-            foreach (var note in notesFromFile)
-            {
-                Console.WriteLine(note);
-            }
-        }
-    }
-    else
-    {
-        storedNotes.Add(userInput);
-        File.AppendAllText("notes.txt", userInput + Environment.NewLine);
-        Console.WriteLine($"\u001b[1;32m\"{userInput}\" note added successfully!\u001b[0m");
-    }
+		while (true)
+		{
+			string userInput = Console.ReadLine() ?? string.Empty;
+			Action operation = userInput switch
+			{
+				"exit" => () => Environment.Exit(0),
+				"notes" => () => Process.Start(
+					new ProcessStartInfo("notes.txt") { UseShellExecute = true }),
+				"clear" => () =>
+				{
+					StoredNotes.Clear();
+					File.WriteAllText("notes.txt", string.Empty);
+					Console.WriteLine("\u001b[1;33mNotes cleared successfully!\u001b[0m");
+				}
+
+				,
+				"show" => () =>
+				{
+					if (!File.Exists("notes.txt") ||
+						new FileInfo("notes.txt").Length == 0)
+					{
+						Console.WriteLine("\u001b[1;31mNo notes found!\u001b[0m");
+					}
+					else
+					{
+						Console.WriteLine("\u001b[1;34mNotes:\u001b[0m");
+						string[] notesFromFile = File.ReadAllLines("notes.txt");
+						foreach (var note in notesFromFile)
+						{
+							Console.WriteLine(note);
+						}
+					}
+				}
+				,
+				_ => () =>
+				{
+					StoredNotes.Add(userInput);
+					File.AppendAllText("notes.txt", userInput + Environment.NewLine);
+					Console.WriteLine("\u001b[1;33mNote added successfully!\u001b[0m");
+				}
+			};
+
+			operation();
+		}
+	}
 }
