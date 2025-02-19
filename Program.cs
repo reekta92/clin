@@ -12,6 +12,7 @@ internal class Program
 
 		while (true)
 		{
+			Console.Write("\u001b[1;32m> \u001b[0m");
 			string userInput = Console.ReadLine() ?? string.Empty;
 			Action operation = userInput switch
 			{
@@ -56,3 +57,4 @@ internal class Program
 		}
 	}
 }
+
