@@ -1,5 +1,5 @@
 # DESCRIPTION
-A very simple CLI notes program programmed in C# and .NET SDK 9.0, needs to be added to the "Path" variable to make it usable from terminal.
+A very simple CLI notes program programmed in C, needs to be added to the "Path" variable to make it usable from terminal.
 
 # Adding program to the path on Windows:
 
