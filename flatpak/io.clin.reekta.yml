@@ -1,0 +1,17 @@
+app-id: io.clin.reekta
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: clin
+
+modules:
+  - name: clin
+    buildsystem: simple
+    build-commands:
+      - . /usr/lib/sdk/rust-stable/enable.sh && cargo build --release --locked
+      - install -Dm755 target/release/clin /app/bin/clin
+    sources:
+      - type: dir
+        path: ..
