@@ -1,0 +1,13 @@
+pkgbase = clin
+	pkgdesc = Encrypted terminal note-taking app
+	pkgver = 0.1.0
+	pkgrel = 1
+	url = https://github.com/reekta/clin
+	arch = x86_64
+	license = MIT
+	makedepends = rust
+	depends = glibc
+	source = clin-0.1.0.tar.gz
+	sha256sums = SKIP
+
+pkgname = clin

@@ -125,6 +125,29 @@ This produces:
 
 - `target/generate-rpm/clin-0.1.0-1.x86_64.rpm`
 
+Arch Linux package metadata is configured in `arch/PKGBUILD`.
+For AUR workflows, `.SRCINFO` is tracked at `arch/.SRCINFO` and can be refreshed with:
+
+```bash
+cd arch && makepkg --printsrcinfo > .SRCINFO
+```
+
+Build `.pkg.tar.zst` package:
+
+```bash
+./scripts/package-arch.sh
+```
+
+This produces:
+
+- `target/arch/clin-0.1.0-1-x86_64.pkg.tar.zst`
+
+Install on Arch Linux:
+
+```bash
+sudo pacman -U target/arch/clin-0.1.0-1-x86_64.pkg.tar.zst
+```
+
 ## Project Files
 
 - `src/main.rs`: application implementation
